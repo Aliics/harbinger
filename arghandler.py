@@ -10,6 +10,10 @@ valid_options = [
 		"requires_param": False
 	},
 	{
+		"option": "--list",
+		"requires_param": False
+	},
+	{
 		"option": "--add",
 		"requires_param": True
 	}
