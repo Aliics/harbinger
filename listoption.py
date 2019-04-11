@@ -21,12 +21,18 @@ def shorten_image_name(long_name):
 	last_index = len(name_dirs) - 1 if len(name_dirs) > 0 else 0
 	return name_dirs[last_index]
 
+def beautify_docker_image_dict(docker_images):
+	beautiful_grid = "image           | version                   | id              | mod_time        | size           \n" if not len(docker_images) == 0 else ""
+	for row in docker_images:
+		beautiful_grid += "{:15.15} | {:25.25} | {:15.15} | {:15.15} | {:15.15}\n".format(row["image"], row["version"], row["id"], row["mod_time"], row["size"])
+		
+	return beautiful_grid
+
 def call(param):
 	try:
 		docker_output = os.popen("docker images").readlines()
-		images = format_docker_images_list(docker_output)
-		for image in images:
-			print(image)
+		output = beautify_docker_image_dict(format_docker_images_list(docker_output))
+		print(output)
 		return True
 	except:
 		return False

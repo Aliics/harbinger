@@ -51,3 +51,37 @@ def test_should_return_blank_when_given_an_empty_string():
 def test_should_return_what_was_given_when_given_a_plain_string():
 	plain_string = "funname"
 	assert listoption.shorten_image_name(plain_string) == "funname"
+
+
+# listoption.beautify_docker_image_dict
+def test_should_return_expected_when_given_a_valid_list_of_dicts():
+	list_of_dict = [
+		{
+			"image": "cake",
+			"version": "tastes",
+			"id": "really",
+			"mod_time": "good years ago",
+			"size": "man"
+		}
+	]
+	expected = "image           | version                   | id              | mod_time        | size           \n"
+	expected += "cake            | tastes                    | really          | good years ago  | man            \n"
+	assert listoption.beautify_docker_image_dict(list_of_dict) == expected
+
+def test_should_return_a_blank_string_when_given_an_empty_list():
+	assert listoption.beautify_docker_image_dict([]) == ""
+
+def test_should_return_max_bounds_characters_when_given_a_list_dict_with_really_long_names():
+	list_of_dict = [
+		{
+			"image": "cakeisareallylongname",
+			"version": "tastesisareallylongname",
+			"id": "reallyisareallylongname",
+			"mod_time": "good years agoisareallylongname",
+			"size": "manisareallylongname"
+		}
+	]
+	expected = "image           | version                   | id              | mod_time        | size           \n"
+	expected += "cakeisareallylo | tastesisareallylongname   | reallyisareally | good years agoi | manisareallylon\n"
+	assert listoption.beautify_docker_image_dict(list_of_dict) == expected
+	
