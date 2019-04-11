@@ -23,4 +23,9 @@ def append_image_to_file(image_name, file_name):
 	added_images_file.close()
 
 def call(param):
+	docker_output = os.popen("docker images").readlines()
+	images = listoption.format_docker_images_list(docker_output)
+	image = param.rstrip()
+	if image_exists(image, images):
+		append_image_to_file(image, ".added_images")
 	return True
