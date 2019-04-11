@@ -1,10 +1,9 @@
 import sys
-import pytest
 
 sys.path.append(".") # only works if run from the dir above
 
+import pytest
 import arghandler
-import helpfunc
 
 # arghandler.arg_option_dict
 def test_should_return_blank_dict_if_given_no_valid_args():
@@ -63,11 +62,37 @@ def test_should_return_false_when_given_version():
 	assert not arghandler.option_req_param("--version")
 
 # arghandler.handle_given_options
-def test_should_invoke_help_function_when_options_contains_list():
+def test_should_return_true_when_given_help_as_the_only_option():
 	options = [
 		{
 			"option": "--help"
 		}
 	]
 	assert arghandler.handle_given_options(options)
+
+def test_should_return_true_when_given_no_options():
+	options = []
+	assert arghandler.handle_given_options(options)
+
+def test_should_return_false_when_given_an_invalid_option():
+	options = [
+		{
+			"option": "--foo"
+		}
+	]
+	assert not arghandler.handle_given_options(options)
+
+def test_should_return_false_when_given_an_invalid_option_with_valid_options():
+	options = [
+		{
+			"option": "--list"
+		},
+		{
+			"option": "--foo"
+		},
+		{
+			"option": "--add"
+		}
+	]
+	assert not arghandler.handle_given_options(options)
 

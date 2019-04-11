@@ -1,28 +1,31 @@
 import sys
-import helpfunc
+import helpoption
+import versionoption
+import listoption
+import addoption
 
 valid_options = [
 	{
 		"option": "--help",
 		"requires_param": False,
+		"call": helpoption.call
 	},
 	{
 		"option": "--version",
-		"requires_param": False
+		"requires_param": False,
+		"call": versionoption.call
 	},
 	{
 		"option": "--list",
-		"requires_param": False
+		"requires_param": False,
+		"call": listoption.call
 	},
 	{
 		"option": "--add",
-		"requires_param": True
+		"requires_param": True,
+		"call": addoption.call
 	}
 ]
-
-option_functions = {
-	"--help": helpfunc.call
-}
 
 def arg_options_dict(args):
 	options = []
@@ -52,10 +55,17 @@ def option_req_param(option):
 def handle_given_options(options):
 	execution = True
 	for option in options:
-		for k, v in option_functions.items():
-			if option["option"] == k:
-				execution = v(option["param"] if "param" in option else "" )
-				if execution: continue 
-				else: break
+		found = False
+		for valid_option in valid_options:
+			if option["option"] == valid_option["option"]:
+				found = True
+				execution = valid_option["call"](option["param"] if "param" in option else "" )
+				if execution: 
+					continue 
+				else: 
+					break
+		if not found:
+			execution = False
+			break
 	return execution
 
