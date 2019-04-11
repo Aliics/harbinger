@@ -70,3 +70,28 @@ def test_should_return_false_when_search_is_over_an_empty_list():
 	images = listoption.format_docker_images_list(docker_output)
 	assert not addoption.image_exists("image", images)
 
+#addoption.file_contains_image
+def test_should_return_true_when_image_is_already_in_file():
+	addoption.append_image_to_file("foo_image", "added_images")
+	assert addoption.file_contains_image("foo_image", "added_images")
+	os.remove("added_images")
+
+def test_should_return_false_when_image_is_not_in_file():
+	addoption.append_image_to_file("foo_image", "added_images")
+	assert not addoption.file_contains_image("bar_image", "added_images")
+	os.remove("added_images")
+
+#addoption.append_image_to_file
+def test_should_create_a_new_file_and_append_the_image_name():
+	addoption.append_image_to_file("foo_image", "added_images")
+	images = open("added_images").readlines()
+	os.remove("added_images")
+	assert images[0] == "{}\n".format("foo_image")
+
+def test_only_append_image_name_if_image_is_not_already_stored():
+	addoption.append_image_to_file("foo_image", "added_images")
+	addoption.append_image_to_file("foo_image", "added_images")
+	images = open("added_images").readlines()
+	os.remove("added_images")
+	assert len(images) == 1
+
