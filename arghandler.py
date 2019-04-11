@@ -1,31 +1,7 @@
 import sys
-import helpoption
-import versionoption
-import listoption
-import addoption
+import harbinger
 
-valid_options = [
-	{
-		"option": "--help",
-		"requires_param": False,
-		"call": helpoption.call
-	},
-	{
-		"option": "--version",
-		"requires_param": False,
-		"call": versionoption.call
-	},
-	{
-		"option": "--list",
-		"requires_param": False,
-		"call": listoption.call
-	},
-	{
-		"option": "--add",
-		"requires_param": True,
-		"call": addoption.call
-	}
-]
+valid_options = harbinger.OPTIONS 
 
 def arg_options_dict(args):
 	options = []
