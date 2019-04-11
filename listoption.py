@@ -22,7 +22,9 @@ def shorten_image_name(long_name):
 	return name_dirs[last_index]
 
 def beautify_docker_image_dict(docker_images):
-	beautiful_grid = "image           | version                   | id              | mod_time        | size           \n" if not len(docker_images) == 0 else ""
+	show_headers = not len(docker_images) == 0
+	beautiful_grid = "image           | version                   | id              | mod_time        | size           \n" if show_headers else ""
+	beautiful_grid += "=================================================================================================\n" if show_headers else ""
 	for row in docker_images:
 		beautiful_grid += "{:15.15} | {:25.25} | {:15.15} | {:15.15} | {:15.15}\n".format(row["image"], row["version"], row["id"], row["mod_time"], row["size"])
 		

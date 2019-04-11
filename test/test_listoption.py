@@ -65,6 +65,7 @@ def test_should_return_expected_when_given_a_valid_list_of_dicts():
 		}
 	]
 	expected = "image           | version                   | id              | mod_time        | size           \n"
+	expected += "=================================================================================================\n"
 	expected += "cake            | tastes                    | really          | good years ago  | man            \n"
 	assert listoption.beautify_docker_image_dict(list_of_dict) == expected
 
@@ -82,6 +83,7 @@ def test_should_return_max_bounds_characters_when_given_a_list_dict_with_really_
 		}
 	]
 	expected = "image           | version                   | id              | mod_time        | size           \n"
+	expected += "=================================================================================================\n"
 	expected += "cakeisareallylo | tastesisareallylongname   | reallyisareally | good years agoi | manisareallylon\n"
 	assert listoption.beautify_docker_image_dict(list_of_dict) == expected
 	
