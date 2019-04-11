@@ -91,8 +91,13 @@ def test_should_return_false_when_given_an_invalid_option_with_valid_options():
 			"option": "--foo"
 		},
 		{
-			"option": "--add"
+			"option": "--add",
+			"param": "bundaberg"
 		}
 	]
 	assert not arghandler.handle_given_options(options)
+
+def test_should_return_true_when_given_no_options():
+	options = {}
+	assert arghandler.handle_given_options(options)
 
