@@ -81,17 +81,24 @@ def test_should_return_false_when_image_is_not_in_file():
 	assert not addoption.file_contains_image("bar_image", "added_images")
 	os.remove("added_images")
 
+def test_should_return_false_when_image_is_non_existant():
+	assert not addoption.file_contains_image("foo", ".add_images")
+
 #addoption.append_image_to_file
 def test_should_create_a_new_file_and_append_the_image_name():
 	addoption.append_image_to_file("foo_image", "added_images")
-	images = open("added_images").readlines()
+	added_images = open("added_images")
+	images = added_images.readlines()
+	added_images.close()
 	os.remove("added_images")
 	assert images[0] == "{}\n".format("foo_image")
 
 def test_only_append_image_name_if_image_is_not_already_stored():
 	addoption.append_image_to_file("foo_image", "added_images")
 	addoption.append_image_to_file("foo_image", "added_images")
-	images = open("added_images").readlines()
+	added_images = open("added_images")
+	images = added_images.readlines()
+	added_images.close()
 	os.remove("added_images")
 	assert len(images) == 1
 
