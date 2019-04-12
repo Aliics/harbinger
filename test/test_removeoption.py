@@ -83,5 +83,3 @@ def test_should_only_remove_one_image_from_file_in_a_file_of_many():
 	assert len(currently_added) == 4
 	os.remove(".added_images")
 
-
-

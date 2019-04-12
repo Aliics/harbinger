@@ -25,5 +25,10 @@ def remove_added_image(image_name, file_name):
 		added_images.close()
 
 def call(param):
-	return True
+	try:
+		remove_added_image(param, ".added_images")
+		return True
+	except:
+		return False
+	return False
 
