@@ -19,18 +19,23 @@ def file_contains_image(image_name, file_name):
 		added_images_file.close()
 	except:
 		return False
-	return False
 
 def append_image_to_file(image_name, file_name):
 	added_images_file = open(file_name, "a")
 	if not file_contains_image(image_name, file_name):
+		print("Image [{}] has been added to your cluster.".format(image_name))
 		added_images_file.write("{}\n".format(image_name))
+	else:
+		print("Image [{}] is already in your cluster!".format(image_name))
 	added_images_file.close()
 
 def call(param):
-	docker_output = os.popen("docker images").readlines()
-	images = listoption.format_docker_images_list(docker_output)
-	image = param.rstrip()
-	if image_exists(image, images):
-		append_image_to_file(image, ".added_images")
-	return True
+	try:
+		docker_output = os.popen("docker images").readlines()
+		images = listoption.format_docker_images_list(docker_output)
+		image = param.rstrip()
+		if image_exists(image, images):
+			append_image_to_file(image, ".added_images")
+		return True
+	except:
+		return False
