@@ -16,6 +16,7 @@ def test_should_return_the_exact_expected_string():
 	expected += "--list     | Outputs a list of docker containers and images that are either currently up, or can be brought up.\n"
 	expected += "--add      | Add an image to your cluster. Making it available to be run in as a container.\n"
 	expected += "--remove   | Remove an image from your cluster, so it won't be brought up as a container.\n"
+	expected += "--up       | Brings your docker cluster up.\n"
 
 	assert helpoption.format_help_text() == expected
 

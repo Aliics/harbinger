@@ -5,6 +5,7 @@ import versionoption
 import listoption
 import addoption
 import removeoption
+import upoption
 
 VERSION = "1.0.0-SNAPSHOT"
 
@@ -38,6 +39,12 @@ OPTIONS = [
 		"desc": "Remove an image from your cluster, so it won't be brought up as a container.",
 		"requires_param": True,
 		"call": removeoption.call
+	},
+	{
+		"option": "--up",
+		"desc": "Brings your docker cluster up.",
+		"requires_param": False,
+		"call": upoption.call
 	}
 ]
 
