@@ -9,7 +9,6 @@ def image_is_added(image_name, file_name):
 		added_images.close()
 	except:
 		return False
-	return False
 
 def remove_added_image(image_name, file_name):
 	if image_is_added(image_name, file_name):
@@ -20,9 +19,13 @@ def remove_added_image(image_name, file_name):
 		for image in images:
 			if not image_name == image.rstrip():
 				new_images.append(image)
+			else:
+				print("Image [{}] has been cleanly removed from your cluster.".format(image_name))
 		added_images = open(file_name, "w")
 		added_images.writelines(new_images)
 		added_images.close()
+	else:
+		print("Image [{}] is not in your cluster at all!".format(image_name))
 
 def call(param):
 	try:
@@ -30,5 +33,4 @@ def call(param):
 		return True
 	except:
 		return False
-	return False
 
