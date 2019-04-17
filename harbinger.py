@@ -8,6 +8,7 @@ import listoption
 import addoption
 import removeoption
 import upoption
+import downoption
 
 VERSION = "1.0.0-SNAPSHOT"
 
@@ -47,6 +48,12 @@ OPTIONS = [
         "desc": "Brings your docker cluster up.",
         "requires_param": False,
         "call": upoption.call
+    },
+    {
+        "option": "--down",
+        "desc": "Brings down your entire docker cluster.",
+        "requires_param": False,
+        "call": downoption.call
     }
 ]
 
