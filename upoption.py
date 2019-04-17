@@ -1,2 +1,2 @@
 def call(param):
-	return True
+    return True
