@@ -1,4 +1,5 @@
 import os
+from multiprocessing import Process
 
 
 def list_added_images(file_name):
@@ -15,11 +16,7 @@ def list_added_images(file_name):
 
 
 def run_docker_container(image_name):
-    try:
-        os.system("docker run {}".format(image_name))
-        return True
-    except:
-        return False
+    os.popen("docker run {}".format(image_name)).close()
 
 
 def call(param):
@@ -28,8 +25,14 @@ def call(param):
         if len(added_images) == 0:
             print("Nice try! There are no containers to bring up. ;^)")
             return True
+        processes = []
         for added_image in added_images:
-            run_docker_container(added_image)
+            docker_runner = Process(target=run_docker_container, args=(added_image,))
+            docker_runner.start()
+            processes.append(docker_runner)
+        for process in processes:
+            process.join()
         return True
     except:
+        print("Uh oh! Something happened when bringing up a container. :^(")
         return False
