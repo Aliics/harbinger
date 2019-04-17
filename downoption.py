@@ -36,7 +36,6 @@ def call(param):
             processes.append({current_container, docker_runner})
         for container_id, process in processes:
             process.join()
-
         return True
     except:
         print("Uh oh! Something happened when bringing down a container. :^(")

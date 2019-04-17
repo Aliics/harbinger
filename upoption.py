@@ -29,9 +29,10 @@ def call(param):
         for added_image in added_images:
             docker_runner = Process(target=run_docker_container, args=(added_image,))
             docker_runner.start()
-            processes.append(docker_runner)
-        for process in processes:
+            processes.append({added_image, docker_runner})
+        for added_image, process in processes:
             process.join()
+            print("Brought up a container of image [{}].".format(added_image))
         return True
     except:
         print("Uh oh! Something happened when bringing up a container. :^(")
