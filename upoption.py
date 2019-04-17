@@ -16,7 +16,7 @@ def list_added_images(file_name):
 
 
 def run_docker_container(image_name):
-    os.popen("docker run {}".format(image_name)).close()
+    os.popen("docker run --detach {}".format(image_name)).close()
 
 
 def call(param):
