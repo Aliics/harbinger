@@ -3,3 +3,4 @@ test/*.swp
 .added_images
 __pycache__/*
 test/__pycache__/*
+.idea/*
